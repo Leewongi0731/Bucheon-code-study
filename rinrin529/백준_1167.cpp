@@ -11,13 +11,13 @@
 #include <cstring>
 
 using namespace std;
-long unsigned int map[10000] = { 0, };
-long unsigned int temp[10000] = { 0, };
+long unsigned int map[100001] = { 0, };
+long unsigned int temp[100001] = { 0, };
 queue <pair<int, long unsigned int>> node;
-vector <pair<int, long unsigned int>> tree[10000];
+vector <pair<int, long unsigned int>> tree[100001];
 queue <int> start;
 long unsigned int ans = 0;
-int visit[10000] = { 0, };
+int visit[100001] = { 0, };
 
 int bfs(int i) {
 	int v = 0, d = 0;
@@ -26,11 +26,11 @@ int bfs(int i) {
 	start.push(i);
 	visit[i] = 1;
 	while (!node.empty()) { // BFS
-		v = node.front().first;
-		d = node.front().second; // dx와 v까지 거리
-		temp[v] = temp[start.front()] + d;
+		v = node.front().first; // 도착 노드
+		d = node.front().second; // 거리
+		temp[v] = temp[start.front()] + d; // i에서 도착노드 v까지의 total 거리, 즉 i -> start.front() -> v 이렇게 경로 설정
 
-		if (map[v] < temp[v]) { // 노드 간 가장 긴 거리로 update
+		if (map[v] < temp[v]) { // 가장 긴 거리로 update
 			map[v] = temp[v];
 			if (ans < map[v]) {
 				ans = map[v];
